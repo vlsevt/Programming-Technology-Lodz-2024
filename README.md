@@ -1,5 +1,5 @@
 # Programming-Technology-Lodz-2024
-first atempt
+
 # Programming Technology Lab
 
 ## Team
