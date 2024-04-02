@@ -2,6 +2,8 @@
 
 # Programming Technology Lab
 
+Task 1 - Collections
+
 ## Team
 
 | Name Surname (initials) | GUID                                     |
