@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 public class WarehouseData
 {
@@ -14,8 +15,15 @@ public class WarehouseData
 
     public void RecordIncomingShipment(int productId, int quantity)
     {
-        Inventory[productId] += quantity;
-        Invoices.Add($"Received {quantity} units of product {ProductCatalog[productId]}");
+        if (Inventory.ContainsKey(productId))
+        {
+            Inventory[productId] += quantity;
+            Invoices.Add($"Received {quantity} units of product {ProductCatalog[productId]}");
+        }
+        else
+        {
+            throw new KeyNotFoundException($"Product with ID {productId} does not exist in the inventory.");
+        }
     }
 
     public bool RecordOutgoingShipment(int productId, int quantity)

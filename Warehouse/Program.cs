@@ -4,22 +4,20 @@ class Program
 {
     static void Main(string[] args)
     {
-        
         WarehouseData warehouseData = new WarehouseData();
         WarehouseLogic warehouseLogic = new WarehouseLogic(warehouseData);
+        WarehouseAPI warehouseAPI = new WarehouseAPI(warehouseLogic);
 
-        
         warehouseData.AddProduct(1, "Product A", 100);
         warehouseData.AddProduct(2, "Product B", 50);
 
-        FulfillOrder(warehouseLogic, 1, 75);
-
-        TakeInSupplies(warehouseLogic, 1, 50);
+        FulfillOrder(warehouseAPI, 1, 75);
+        TakeInSupplies(warehouseAPI, 1, 50);
     }
 
-    static void FulfillOrder(WarehouseLogic warehouseLogic, int productId, int quantity)
+    static void FulfillOrder(WarehouseAPI warehouseAPI, int productId, int quantity)
     {
-        bool orderFulfilled = warehouseLogic.FulfillOrder(productId, quantity);
+        bool orderFulfilled = warehouseAPI.FulfillOrder(productId, quantity);
 
         if (orderFulfilled)
         {
@@ -31,9 +29,9 @@ class Program
         }
     }
 
-    static void TakeInSupplies(WarehouseLogic warehouseLogic, int productId, int quantity)
+    static void TakeInSupplies(WarehouseAPI warehouseAPI, int productId, int quantity)
     {
-        warehouseLogic.RestockProduct(productId, "Product A", quantity);
+        warehouseAPI.RestockProduct(productId, "Product A", quantity);
         Console.WriteLine($"Received {quantity} units of product with ID {productId}.");
     }
 }

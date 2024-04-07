@@ -5,11 +5,15 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Warehouse", "Warehouse\Warehouse.csproj", "{1CFFC208-F28C-4EFE-B08B-A51EDD842F9F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarehouseTests", "WarehouseTests\WarehouseTests.csproj", "{0DE03045-A06A-4D48-9A0F-A3E688D3C468}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarehouseDataTests", "WarehouseTests\WarehouseDataTests.csproj", "{0DE03045-A06A-4D48-9A0F-A3E688D3C468}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Warehouse_Data_layer", "Warehouse_Data_layer\Warehouse_Data_layer.csproj", "{793262F9-8BAF-48F1-8D63-AB8CC75BA743}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Warehouse_Logic_layer", "Warehouse_Logic_layer\Warehouse_Logic_layer.csproj", "{0376A1BD-1476-4DC9-B6E3-9BCA714E6094}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseAPI", "WarehouseAPI\WarehouseAPI.csproj", "{5FFBD540-722A-474E-9463-A7D003EC6C4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseLogicTests", "WarehouseLogicTests\WarehouseLogicTests.csproj", "{D7D22F10-A7EB-4317-938D-A2AAF2757B31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{0376A1BD-1476-4DC9-B6E3-9BCA714E6094}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0376A1BD-1476-4DC9-B6E3-9BCA714E6094}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0376A1BD-1476-4DC9-B6E3-9BCA714E6094}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FFBD540-722A-474E-9463-A7D003EC6C4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FFBD540-722A-474E-9463-A7D003EC6C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FFBD540-722A-474E-9463-A7D003EC6C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FFBD540-722A-474E-9463-A7D003EC6C4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7D22F10-A7EB-4317-938D-A2AAF2757B31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7D22F10-A7EB-4317-938D-A2AAF2757B31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7D22F10-A7EB-4317-938D-A2AAF2757B31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7D22F10-A7EB-4317-938D-A2AAF2757B31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
