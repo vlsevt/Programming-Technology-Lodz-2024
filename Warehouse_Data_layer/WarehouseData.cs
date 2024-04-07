@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public class WarehouseData
 {
     public Dictionary<int, string> ProductCatalog { get; set; } = new Dictionary<int, string>();
     public List<string> Invoices { get; set; } = new List<string>();
     public Dictionary<int, int> Inventory { get; set; } = new Dictionary<int, int>();
+    public Users Users { get; set; } = new Users(); 
 
     public void AddProduct(int productId, string productName, int initialQuantity)
     {
@@ -15,15 +15,8 @@ public class WarehouseData
 
     public void RecordIncomingShipment(int productId, int quantity)
     {
-        if (Inventory.ContainsKey(productId))
-        {
-            Inventory[productId] += quantity;
-            Invoices.Add($"Received {quantity} units of product {ProductCatalog[productId]}");
-        }
-        else
-        {
-            throw new KeyNotFoundException($"Product with ID {productId} does not exist in the inventory.");
-        }
+        Inventory[productId] += quantity;
+        Invoices.Add($"Received {quantity} units of product {ProductCatalog[productId]}");
     }
 
     public bool RecordOutgoingShipment(int productId, int quantity)
@@ -39,4 +32,11 @@ public class WarehouseData
             return false;
         }
     }
+}
+
+public class Users
+{
+    public List<string> Readers { get; set; } = new List<string>(); 
+    public List<string> Customers { get; set; } = new List<string>();
+    public List<string> Suppliers { get; set; } = new List<string>();
 }
