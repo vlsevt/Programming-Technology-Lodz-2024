@@ -5,12 +5,21 @@ public class WarehouseData
     public Dictionary<int, string> ProductCatalog { get; set; } = new Dictionary<int, string>();
     public List<string> Invoices { get; set; } = new List<string>();
     public Dictionary<int, int> Inventory { get; set; } = new Dictionary<int, int>();
-    public Users Users { get; set; } = new Users(); 
+    public Users Users { get; set; } = new Users();
+    private int productIdCounter = 0;
 
-    public void AddProduct(int productId, string productName, int initialQuantity)
+    public int idAssignment()
     {
-        ProductCatalog.Add(productId, productName);
-        Inventory.Add(productId, initialQuantity);
+        productIdCounter++;
+        return productIdCounter;
+    }
+
+    public int AddProduct(string productName, int initialQuantity)
+    {
+        int newProductId = idAssignment();
+        ProductCatalog.Add(newProductId, productName);
+        Inventory.Add(newProductId, initialQuantity);
+        return newProductId;
     }
 
     public void RecordIncomingShipment(int productId, int quantity)
@@ -36,7 +45,7 @@ public class WarehouseData
 
 public class Users
 {
-    public List<string> Readers { get; set; } = new List<string>(); 
+    public List<string> Staff { get; set; } = new List<string>(); 
     public List<string> Customers { get; set; } = new List<string>();
     public List<string> Suppliers { get; set; } = new List<string>();
 }

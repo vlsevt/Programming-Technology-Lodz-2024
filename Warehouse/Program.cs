@@ -8,18 +8,21 @@ class Program
         WarehouseLogic warehouseLogic = new WarehouseLogic(warehouseData);
         WarehouseAPI warehouseAPI = new WarehouseAPI(warehouseLogic);
 
-        warehouseData.AddProduct(1, "Product A", 100);
-        warehouseData.AddProduct(2, "Product B", 50);
+        var idOfProductA = warehouseData.AddProduct("Product A", 100);
+        var idOfProductB = warehouseData.AddProduct("Product B", 50);
 
-        
-        warehouseData.Users.Readers.Add("John");
+        Console.WriteLine("Product A id:" + idOfProductA);
+        Console.WriteLine("Product B id:" + idOfProductB);
+
+
+        warehouseData.Users.Staff.Add("John");
         warehouseData.Users.Customers.Add("Alice");
         warehouseData.Users.Suppliers.Add("Bob");
 
         
         Console.WriteLine("Users in the warehouse:");
-        Console.WriteLine("Readers:");
-        foreach (var reader in warehouseData.Users.Readers)
+        Console.WriteLine("Staff:");
+        foreach (var reader in warehouseData.Users.Staff)
         {
             Console.WriteLine($"- {reader}");
         }
