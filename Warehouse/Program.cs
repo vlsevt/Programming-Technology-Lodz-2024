@@ -1,12 +1,12 @@
-﻿using System;
+﻿using WarehouseDataLayer;
+using WarehouseLogicLayer;
 
 class Program
 {
     static void Main(string[] args)
     {
-        WarehouseData warehouseData = new WarehouseData();
-        WarehouseLogic warehouseLogic = new WarehouseLogic(warehouseData);
-        WarehouseAPI warehouseAPI = new WarehouseAPI(warehouseLogic);
+        WarehouseDataAPI warehouseData = new WarehouseData();
+        WarehouseLogicAPI warehouseLogic = new WarehouseLogic(warehouseData);
 
         var idOfProductA = warehouseData.AddProduct("Product A", 100);
         var idOfProductB = warehouseData.AddProduct("Product B", 50);
@@ -15,35 +15,35 @@ class Program
         Console.WriteLine("Product B id:" + idOfProductB);
 
 
-        warehouseData.Users.Staff.Add("John");
-        warehouseData.Users.Customers.Add("Alice");
-        warehouseData.Users.Suppliers.Add("Bob");
+        warehouseData.Staff.Add("John");
+        warehouseData.Customers.Add("Alice");
+        warehouseData.Suppliers.Add("Bob");
 
         
         Console.WriteLine("Users in the warehouse:");
         Console.WriteLine("Staff:");
-        foreach (var reader in warehouseData.Users.Staff)
+        foreach (var reader in warehouseData.Staff)
         {
             Console.WriteLine($"- {reader}");
         }
         Console.WriteLine("\nCustomers:");
-        foreach (var customer in warehouseData.Users.Customers)
+        foreach (var customer in warehouseData.Customers)
         {
             Console.WriteLine($"- {customer}");
         }
         Console.WriteLine("\nSuppliers:");
-        foreach (var supplier in warehouseData.Users.Suppliers)
+        foreach (var supplier in warehouseData.Suppliers)
         {
             Console.WriteLine($"- {supplier}");
         }
 
-        FulfillOrder(warehouseAPI, 1, 75);
-        TakeInSupplies(warehouseAPI, 1, 50);
+        FulfillOrder(warehouseLogic, 1, 75);
+        TakeInSupplies(warehouseLogic, 1, 50);
     }
 
-    static void FulfillOrder(WarehouseAPI warehouseAPI, int productId, int quantity)
+    static void FulfillOrder(WarehouseLogicAPI warehouseLogic, int productId, int quantity)
     {
-        bool orderFulfilled = warehouseAPI.FulfillOrder(productId, quantity);
+        bool orderFulfilled = warehouseLogic.FulfillOrder(productId, quantity);
 
         if (orderFulfilled)
         {
@@ -55,9 +55,9 @@ class Program
         }
     }
 
-    static void TakeInSupplies(WarehouseAPI warehouseAPI, int productId, int quantity)
+    static void TakeInSupplies(WarehouseLogicAPI warehouseLogic, int productId, int quantity)
     {
-        warehouseAPI.RestockProduct(productId, "Product A", quantity);
+        warehouseLogic.RestockProduct(productId, "Product A", quantity);
         Console.WriteLine($"Received {quantity} units of product with ID {productId}.");
     }
 }

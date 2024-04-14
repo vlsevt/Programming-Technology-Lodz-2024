@@ -1,10 +1,12 @@
 using NUnit.Framework;
+using WarehouseDataLayer;
+using WarehouseLogicLayer;
 
 [TestFixture]
 public class WarehouseLogicTests
 {
-    private WarehouseData warehouse;
-    private WarehouseLogic logic;
+    private WarehouseDataAPI warehouse;
+    private WarehouseLogicAPI logic;
 
     [SetUp]
     public void initialize()

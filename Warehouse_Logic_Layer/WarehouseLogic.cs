@@ -1,19 +1,18 @@
-﻿public class WarehouseLogic
-{
-    private WarehouseData _warehouse;
+﻿using WarehouseDataLayer;
 
-    public WarehouseLogic(WarehouseData warehouse)
+namespace WarehouseLogicLayer {
+    public class WarehouseLogic : WarehouseLogicAPI
     {
-        _warehouse = warehouse;
-    }
+        public WarehouseLogic(WarehouseDataAPI warehouse) : base(warehouse) { }
 
-    public void RestockProduct(int productId, string productName, int quantity)
-    {
-        _warehouse.RecordIncomingShipment(productId, quantity);
-    }
+        public override void RestockProduct(int productId, string productName, int quantity)
+        {
+            _warehouse.RecordIncomingShipment(productId, quantity);
+        }
 
-    public bool FulfillOrder(int productId, int quantity)
-    {
-        return _warehouse.RecordOutgoingShipment(productId, quantity);
+        public override bool FulfillOrder(int productId, int quantity)
+        {
+            return _warehouse.RecordOutgoingShipment(productId, quantity);
+        }   
     }
 }

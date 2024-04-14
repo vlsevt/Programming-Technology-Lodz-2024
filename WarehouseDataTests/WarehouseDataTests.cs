@@ -1,9 +1,10 @@
 using NUnit.Framework;
+using WarehouseDataLayer;
 
 [TestFixture]
 public class WarehouseDataTests
 {
-    private WarehouseData warehouse;
+    private WarehouseDataAPI warehouse;
 
     [SetUp]
     public void Initialize()
@@ -66,14 +67,14 @@ public class WarehouseDataTests
     [Test]
     public void TestAddUser()
     {
-        warehouse.Users.Staff.Add("John");
-        warehouse.Users.Customers.Add("Alice");
-        warehouse.Users.Suppliers.Add("Bob");
+        warehouse.Staff.Add("John");
+        warehouse.Customers.Add("Alice");
+        warehouse.Suppliers.Add("Bob");
 
         
-        CollectionAssert.Contains(warehouse.Users.Staff, "John");
-        CollectionAssert.Contains(warehouse.Users.Customers, "Alice");
-        CollectionAssert.Contains(warehouse.Users.Suppliers, "Bob");
+        CollectionAssert.Contains(warehouse.Staff, "John");
+        CollectionAssert.Contains(warehouse.Customers, "Alice");
+        CollectionAssert.Contains(warehouse.Suppliers, "Bob");
     }
 
     [Test]
