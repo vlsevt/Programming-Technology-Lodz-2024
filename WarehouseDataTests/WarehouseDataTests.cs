@@ -68,14 +68,19 @@
         [Test]
         public void TestAddUser()
         {
-            warehouse.Staff.Add("John");
-            warehouse.Customers.Add("Alice");
-            warehouse.Suppliers.Add("Bob");
+            Person staffMember = new Person { FirstName = "John", LastName = "Hendricks", Id = 1 };
+            Person customer = new Person { FirstName = "Alice", LastName = "Murphy", Id = 2 };
+            Person supplier = new Person { FirstName = "Bob", LastName = "Moyer", Id = 3 };
+
+            warehouse.Staff.Add(staffMember);
+            warehouse.Customers.Add(customer);
+            warehouse.Suppliers.Add(supplier);
 
 
-            CollectionAssert.Contains(warehouse.Staff, "John");
-            CollectionAssert.Contains(warehouse.Customers, "Alice");
-            CollectionAssert.Contains(warehouse.Suppliers, "Bob");
+
+            CollectionAssert.Contains(warehouse.Staff, staffMember);
+            CollectionAssert.Contains(warehouse.Customers, customer);
+            CollectionAssert.Contains(warehouse.Suppliers, supplier);
         }
 
         [Test]

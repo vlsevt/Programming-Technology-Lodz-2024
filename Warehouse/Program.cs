@@ -16,27 +16,29 @@ namespace Warehouse
             Console.WriteLine("Product A id:" + idOfProductA);
             Console.WriteLine("Product B id:" + idOfProductB);
 
+            Person staffMember = new Person { FirstName = "John", LastName = "Hendricks", Id = 1 };
+            Person customer = new Person { FirstName = "Alice", LastName = "Murphy", Id = 2 };
+            Person supplier = new Person { FirstName = "Bob", LastName = "Moyer", Id = 3 };
 
-            warehouseData.Staff.Add("John");
-            warehouseData.Customers.Add("Alice");
-            warehouseData.Suppliers.Add("Bob");
-
+            warehouseData.Staff.Add(staffMember);
+            warehouseData.Customers.Add(customer);
+            warehouseData.Suppliers.Add(supplier);
 
             Console.WriteLine("Users in the warehouse:");
             Console.WriteLine("Staff:");
-            foreach (var reader in warehouseData.Staff)
+            foreach (var currentStaffMember in warehouseData.Staff)
             {
-                Console.WriteLine($"- {reader}");
+                Console.WriteLine($"- {currentStaffMember}");
             }
             Console.WriteLine("\nCustomers:");
-            foreach (var customer in warehouseData.Customers)
+            foreach (var currentCustomer in warehouseData.Customers)
             {
-                Console.WriteLine($"- {customer}");
+                Console.WriteLine($"- {currentCustomer}");
             }
             Console.WriteLine("\nSuppliers:");
-            foreach (var supplier in warehouseData.Suppliers)
+            foreach (var currentSupplier in warehouseData.Suppliers)
             {
-                Console.WriteLine($"- {supplier}");
+                Console.WriteLine($"- {currentSupplier}");
             }
 
             FulfillOrder(warehouseLogic, 1, 75);
