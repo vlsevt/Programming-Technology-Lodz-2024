@@ -35,14 +35,14 @@ namespace WarehouseDataLayer
             return productIdCounter;
         }
 
-        public void RecordIncomingShipment(int productId, int quantity)
+        public bool RecordIncomingShipment(int productId, int quantity)
         {
             if (Inventory is null)
             {
-                throw new InvalidOperationException("Inventory is not initialized.");
+                return false;
             }
 
-            InventoryProduct foundProduct = Inventory.FirstOrDefault(p => p.Id == productId);
+            InventoryProduct? foundProduct = Inventory.FirstOrDefault(p => p.Id == productId);
 
             if (foundProduct != null)
             {
@@ -51,19 +51,20 @@ namespace WarehouseDataLayer
                 int newInvoiceId = invoiceIdAssignment();
                 if (product == null)
                 {
-                    throw new Exception("Product not found in catalog.");
+                    return false;
                 }
                 Invoices.Add(newInvoiceId, $"Received {quantity} units of product {ProductCatalog[productId - 1].Name}");
+                return true;
             }
             else
             {
-                throw new InvalidOperationException("Product not found");
+                return false;
             }
         }
 
         public bool RecordOutgoingShipment(int productId, int quantity)
         {
-            InventoryProduct product = Inventory.FirstOrDefault(p => p.Id == productId);
+            InventoryProduct? product = Inventory.FirstOrDefault(p => p.Id == productId);
 
             if (product != null && product.Quantity >= quantity)
             {
@@ -72,7 +73,7 @@ namespace WarehouseDataLayer
                 int newInvoiceId = invoiceIdAssignment();
                 if (catalogProduct == null)
                 {
-                    throw new Exception("Product not found in catalog.");
+                    return false;
                 }
                 Invoices.Add(newInvoiceId, $"Shipped {quantity} units of product {catalogProduct.Name}");
                 return true;

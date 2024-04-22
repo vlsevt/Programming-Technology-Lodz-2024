@@ -11,7 +11,7 @@ namespace WarehouseLogicLayer
             _warehouse = warehouse;
         }
 
-        public abstract void RestockProduct(int productId, string productName, int quantity);
+        public abstract bool RestockProduct(int productId, string productName, int quantity);
         public abstract bool FulfillOrder(int productId, int quantity);
     }
 }

@@ -3,7 +3,7 @@
     public interface WarehouseDataAPI
     {
         int AddProduct(string productName, int initialQuantity);
-        void RecordIncomingShipment(int productId, int quantity);
+        bool RecordIncomingShipment(int productId, int quantity);
         bool RecordOutgoingShipment(int productId, int quantity);
         public List<CatalogProduct> ProductCatalog { get; set; }
         public Dictionary<int, string> Invoices { get; set; }
