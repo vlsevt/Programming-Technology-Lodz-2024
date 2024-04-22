@@ -1,15 +1,15 @@
 ﻿namespace WarehouseDataLayer
 {
-    public abstract class WarehouseDataAPI
+    public interface WarehouseDataAPI
     {
-        public Dictionary<int, string> ProductCatalog { get; set; } = new Dictionary<int, string>();
-        public List<string> Invoices { get; set; } = new List<string>();
-        public Dictionary<int, int> Inventory { get; set; } = new Dictionary<int, int>();
-        public List<Person> Staff { get; set; } = new List<Person>();
-        public List<Person> Customers { get; set; } = new List<Person>();
-        public List<Person> Suppliers { get; set; } = new List<Person>();
-        public abstract int AddProduct(string productName, int initialQuantity);
-        public abstract void RecordIncomingShipment(int productId, int quantity);
-        public abstract bool RecordOutgoingShipment(int productId, int quantity);
+        int AddProduct(string productName, int initialQuantity);
+        void RecordIncomingShipment(int productId, int quantity);
+        bool RecordOutgoingShipment(int productId, int quantity);
+        public List<CatalogProduct> ProductCatalog { get; set; }
+        public Dictionary<int, string> Invoices { get; set; }
+        public List<InventoryProduct> Inventory { get; set; }
+        public List<Staff> Staff { get; set; }
+        public List<Customer> Customers { get; set; }
+        public List<Supplier> Suppliers { get; set; }
     }
 }

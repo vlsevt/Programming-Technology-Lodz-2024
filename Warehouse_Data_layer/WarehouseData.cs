@@ -1,34 +1,80 @@
-﻿namespace WarehouseDataLayer
+﻿using System.Collections.Generic;
+
+namespace WarehouseDataLayer
 {
     public class WarehouseData : WarehouseDataAPI
     {
+        public List<CatalogProduct> ProductCatalog { get; set; } = new List<CatalogProduct>();
+        public Dictionary<int, string> Invoices { get; set; } = new Dictionary<int, string>();
+        public List<InventoryProduct> Inventory { get; set; } = new List<InventoryProduct>();
+
+        public List<Staff> Staff { get; set; } = new List<Staff>();
+        public List<Customer> Customers { get; set; } = new List<Customer>();
+        public List<Supplier> Suppliers { get; set; } = new List<Supplier>();
+
         private int productIdCounter = 0;
-        public int idAssignment()
+        private int invoiceIdCounter = 0;
+
+        public int productIdAssignment()
         {
             productIdCounter++;
             return productIdCounter;
         }
 
-        public override int AddProduct(string productName, int initialQuantity)
+        public int invoiceIdAssignment()
         {
-            int newProductId = idAssignment();
-            ProductCatalog.Add(newProductId, productName);
-            Inventory.Add(newProductId, initialQuantity);
-            return newProductId;
+            invoiceIdCounter++;
+            return invoiceIdCounter;
         }
 
-        public override void RecordIncomingShipment(int productId, int quantity)
+        public int AddProduct(string productName, int initialQuantity)
         {
-            Inventory[productId] += quantity;
-            Invoices.Add($"Received {quantity} units of product {ProductCatalog[productId]}");
+            int newProductId = productIdAssignment();
+            ProductCatalog.Add(new CatalogProduct(newProductId, productName));
+            Inventory.Add(new InventoryProduct(newProductId, initialQuantity));
+            return productIdCounter;
         }
 
-        public override bool RecordOutgoingShipment(int productId, int quantity)
+        public void RecordIncomingShipment(int productId, int quantity)
         {
-            if (Inventory.ContainsKey(productId) && Inventory[productId] >= quantity)
+            if (Inventory is null)
             {
-                Inventory[productId] -= quantity;
-                Invoices.Add($"Shipped {quantity} units of product {ProductCatalog[productId]}");
+                throw new InvalidOperationException("Inventory is not initialized.");
+            }
+
+            InventoryProduct foundProduct = Inventory.FirstOrDefault(p => p.Id == productId);
+
+            if (foundProduct != null)
+            {
+                foundProduct.Quantity += quantity;
+                var product = ProductCatalog[productId - 1];
+                int newInvoiceId = invoiceIdAssignment();
+                if (product == null)
+                {
+                    throw new Exception("Product not found in catalog.");
+                }
+                Invoices.Add(newInvoiceId, $"Received {quantity} units of product {ProductCatalog[productId - 1].Name}");
+            }
+            else
+            {
+                throw new InvalidOperationException("Product not found");
+            }
+        }
+
+        public bool RecordOutgoingShipment(int productId, int quantity)
+        {
+            InventoryProduct product = Inventory.FirstOrDefault(p => p.Id == productId);
+
+            if (product != null && product.Quantity >= quantity)
+            {
+                product.Quantity -= quantity;
+                var catalogProduct = ProductCatalog[productId - 1];
+                int newInvoiceId = invoiceIdAssignment();
+                if (catalogProduct == null)
+                {
+                    throw new Exception("Product not found in catalog.");
+                }
+                Invoices.Add(newInvoiceId, $"Shipped {quantity} units of product {catalogProduct.Name}");
                 return true;
             }
             else

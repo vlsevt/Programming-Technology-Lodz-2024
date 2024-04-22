@@ -1,12 +1,12 @@
-﻿using TestWarehouseDataLayer;
+﻿using WarehouseDataLayer;
 
 namespace WarehouseLogicLayer
 {
     public class WarehouseLogic : WarehouseLogicAPI
     {
-        private readonly IWarehouseData _warehouse;
+        private readonly WarehouseDataAPI _warehouse;
 
-        public WarehouseLogic(IWarehouseData warehouse) : base(warehouse) 
+        public WarehouseLogic(WarehouseDataAPI warehouse) : base(warehouse) 
         {
             _warehouse = warehouse;
         }
