@@ -1,4 +1,5 @@
-﻿using WarehouseDataLayer;
+﻿using TestWarehouseDataLayer;
+using WarehouseDataLayer;
 using WarehouseLogicLayer;
 
 namespace Warehouse
@@ -7,7 +8,7 @@ namespace Warehouse
     {
         static void Main(string[] args)
         {
-            WarehouseDataAPI warehouseData = new WarehouseData();
+            IWarehouseData warehouseData = new WarehouseDataFake();
             WarehouseLogicAPI warehouseLogic = new WarehouseLogic(warehouseData);
 
             var idOfProductA = warehouseData.AddProduct("Product A", 100);
@@ -20,6 +21,7 @@ namespace Warehouse
             Person customer = new Person { FirstName = "Alice", LastName = "Murphy", Id = 2 };
             Person supplier = new Person { FirstName = "Bob", LastName = "Moyer", Id = 3 };
 
+            
             warehouseData.Staff.Add(staffMember);
             warehouseData.Customers.Add(customer);
             warehouseData.Suppliers.Add(supplier);

@@ -1,20 +1,20 @@
-    using NUnit.Framework;
-    using WarehouseDataLayer;
-    using WarehouseLogicLayer;
+using NUnit.Framework;
+using TestWarehouseDataLayer;
+using WarehouseLogicLayer;
 
-
+namespace WarehouseLogicLayer.Tests
+{
     [TestFixture]
     public class WarehouseLogicTests
     {
-        private WarehouseDataAPI warehouse;
+        private IWarehouseData warehouse;
         private WarehouseLogicAPI logic;
 
         [SetUp]
-        public void initialize()
+        public void Initialize()
         {
-            warehouse = new WarehouseData();
+            warehouse = new WarehouseDataFake(); 
             logic = new WarehouseLogic(warehouse);
-
         }
 
         [Test]
@@ -22,13 +22,10 @@
         {
             warehouse.AddProduct("Product A", 0);
 
-
             logic.RestockProduct(1, "Product A", 50);
-
 
             Assert.AreEqual(50, warehouse.Inventory[1]);
         }
-
 
         [Test]
         public void TestFulfillOrder_Successful()
@@ -52,3 +49,4 @@
             Assert.AreEqual(100, warehouse.Inventory[1]);
         }
     }
+}

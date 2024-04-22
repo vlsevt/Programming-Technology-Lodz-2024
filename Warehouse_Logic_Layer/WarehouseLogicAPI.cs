@@ -1,13 +1,12 @@
-﻿using WarehouseDataLayer;
+﻿using TestWarehouseDataLayer;
 
 namespace WarehouseLogicLayer
 {
-
     public abstract class WarehouseLogicAPI
     {
-        protected WarehouseDataAPI _warehouse;
+        protected IWarehouseData _warehouse;
 
-        protected WarehouseLogicAPI(WarehouseDataAPI warehouse)
+        protected WarehouseLogicAPI(IWarehouseData warehouse)
         {
             _warehouse = warehouse;
         }

@@ -1,9 +1,15 @@
-﻿using WarehouseDataLayer;
+﻿using TestWarehouseDataLayer;
 
-namespace WarehouseLogicLayer {
+namespace WarehouseLogicLayer
+{
     public class WarehouseLogic : WarehouseLogicAPI
     {
-        public WarehouseLogic(WarehouseDataAPI warehouse) : base(warehouse) { }
+        private readonly IWarehouseData _warehouse;
+
+        public WarehouseLogic(IWarehouseData warehouse) : base(warehouse) 
+        {
+            _warehouse = warehouse;
+        }
 
         public override void RestockProduct(int productId, string productName, int quantity)
         {
@@ -13,6 +19,6 @@ namespace WarehouseLogicLayer {
         public override bool FulfillOrder(int productId, int quantity)
         {
             return _warehouse.RecordOutgoingShipment(productId, quantity);
-        }   
+        }
     }
 }
