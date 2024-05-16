@@ -3,7 +3,7 @@
 # Programming Technology Lab
 
 
-##Task 2 - Graphical data
+## Task 2 - Graphical data
 
 Warehouse Business process
 
