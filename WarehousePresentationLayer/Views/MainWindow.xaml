@@ -11,27 +11,37 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
             <Label Content="Products" FontSize="18" FontWeight="Bold"/>
-            <Button Content="Refresh" Margin="10,0,0,0"/>
+            <Button Content="Add Product" Margin="10,0,0,0" Click="AddProduct_Click"/>
+            <Button Content="Refresh" Margin="10,0,0,0" Click="Refresh_Click"/>
         </StackPanel>
         <ListBox x:Name="listBoxProducts" Grid.Row="1" Margin="0,0,20,0"/>
 
         <StackPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Margin="20,0,0,0">
             <TabControl>
                 <TabItem Header="Staff">
-                    <ListBox x:Name="listBoxStaff" Margin="0,10,0,0"/>
+                    <StackPanel>
+                        <ListBox x:Name="listBoxStaff" Margin="0,10,0,0"/>
+                        <Button Content="Add Staff" Margin="0,10,0,0" Click="AddStaff_Click"/>
+                    </StackPanel>
                 </TabItem>
                 <TabItem Header="Customers">
-                    <ListBox x:Name="listBoxCustomers" Margin="0,10,0,0"/>
+                    <StackPanel>
+                        <ListBox x:Name="listBoxCustomers" Margin="0,10,0,0"/>
+                        <Button Content="Add Customer" Margin="0,10,0,0" Click="AddCustomer_Click"/>
+                    </StackPanel>
                 </TabItem>
                 <TabItem Header="Suppliers">
-                    <ListBox x:Name="listBoxSuppliers" Margin="0,10,0,0"/>
+                    <StackPanel>
+                        <ListBox x:Name="listBoxSuppliers" Margin="0,10,0,0"/>
+                        <Button Content="Add Supplier" Margin="0,10,0,0" Click="AddSupplier_Click"/>
+                    </StackPanel>
                 </TabItem>
             </TabControl>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="Fulfill_Order" Content="Fulfill Order" Margin="0,0,10,0" Width="120" HorizontalAlignment="Right" Click="Button_Click"/>
-            <Button x:Name="Take_In_Supplies" Content="Take In Supplies" Width="120" HorizontalAlignment="Right" Click="Button_Click_1"/>
+            <Button x:Name="Fulfill_Order" Content="Fulfill Order" Margin="0,0,10,0" Width="120" HorizontalAlignment="Right" Click="FulfillOrder_Click"/>
+            <Button x:Name="Take_In_Supplies" Content="Take In Supplies" Width="120" HorizontalAlignment="Right" Click="TakeInSupplies_Click"/>
         </StackPanel>
     </Grid>
 </Window>
