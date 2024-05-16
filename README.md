@@ -2,9 +2,10 @@
 
 # Programming Technology Lab
 
-Task 1 - Collections
 
-Warehouse Business process - first atempt
+##Task 2 - Graphical data
+
+Warehouse Business process
 
 ## Team
 
