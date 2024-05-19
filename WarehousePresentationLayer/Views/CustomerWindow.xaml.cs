@@ -12,11 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace WarehousePresentationLayer.Views
+namespace Warehouse
 {
-    /// <summary>
-    /// Interaction logic for CustomerWindow.xaml
-    /// </summary>
+
     public partial class CustomerWindow : Window
     {
         public CustomerWindow()

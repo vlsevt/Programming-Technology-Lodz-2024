@@ -1,9 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using WarehouseDataLayer;
 using WarehouseLogicLayer;
 
-namespace WarehouseApp.ViewModels
+namespace WarehousePresentationLayer.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
@@ -13,9 +14,9 @@ namespace WarehouseApp.ViewModels
         public ObservableCollection<InventoryProduct> Inventory { get; }
         public ObservableCollection<string> Invoices { get; }
 
-        public MainViewModel(WarehouseDataAPI warehouseData)
+        public MainViewModel(WarehouseLogicAPI warehouseLogic)
         {
-            _warehouseLogic = new WarehouseLogic(warehouseData);
+            _warehouseLogic = warehouseLogic;
             ProductCatalog = new ObservableCollection<CatalogProduct>(_warehouseLogic.ProductCatalog);
             Inventory = new ObservableCollection<InventoryProduct>(_warehouseLogic.Inventory);
             Invoices = new ObservableCollection<string>(_warehouseLogic.Invoices);
