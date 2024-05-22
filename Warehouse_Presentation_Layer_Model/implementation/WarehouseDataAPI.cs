@@ -1,4 +1,6 @@
-﻿namespace WarehouseDataLayer
+﻿using Warehouse.Models;
+
+namespace WarehouseDataLayer
 {
     public interface IWarehouseDataAPI
     {

@@ -4,9 +4,9 @@ namespace WarehouseLogicLayer
 {
     public class WarehouseLogic : WarehouseLogicAPI
     {
-        private new readonly IWarehouseDataAPI _warehouse;
+        private new readonly WarehouseDataAPI _warehouse;
 
-        public WarehouseLogic(IWarehouseDataAPI warehouse) : base(warehouse)
+        public WarehouseLogic(WarehouseDataAPI warehouse) : base(warehouse)
         {
             _warehouse = warehouse;
         }
