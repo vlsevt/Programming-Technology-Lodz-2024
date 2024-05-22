@@ -1,12 +1,11 @@
-﻿using WarehouseDataLayer;
-
-namespace WarehouseLogicLayer
+﻿
+namespace PresentationLayer.Model
 {
     public class WarehouseLogic : WarehouseLogicAPI
     {
-        private new readonly WarehouseDataAPI _warehouse;
+        private new readonly IWarehouseDataAPI _warehouse;
 
-        public WarehouseLogic(WarehouseDataAPI warehouse) : base(warehouse)
+        public WarehouseLogic(IWarehouseDataAPI warehouse) : base(warehouse)
         {
             _warehouse = warehouse;
         }

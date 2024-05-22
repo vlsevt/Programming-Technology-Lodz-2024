@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using WarehouseLogicLayer;
-using WarehouseDataLayer;
-
 
 namespace PresentationLayer.Model
 {

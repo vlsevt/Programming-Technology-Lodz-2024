@@ -1,6 +1,4 @@
-﻿using Warehouse.Models;
-
-namespace WarehouseDataLayer
+﻿namespace PresentationLayer.Model
 {
     public interface IWarehouseDataAPI
     {

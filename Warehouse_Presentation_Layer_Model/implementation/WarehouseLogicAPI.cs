@@ -1,6 +1,4 @@
-﻿using WarehouseDataLayer;
-
-namespace WarehouseLogicLayer
+﻿namespace PresentationLayer.Model
 {
     public abstract class WarehouseLogicAPI
     {
