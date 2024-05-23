@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using PresentationLayer.Model;
 
@@ -48,7 +49,7 @@ namespace PresentationLayer.ViewModel
 
         public MainViewModel(ModelAPI model)
         {
-            _model = model;
+            _model = model ?? throw new ArgumentNullException(nameof(model));
             ProductCatalog = new ObservableCollection<CatalogProduct>(_model.GetProductCatalog());
             Inventory = new ObservableCollection<InventoryProduct>(_model.GetInventory());
             Invoices = new ObservableCollection<string>(_model.GetInvoices());
@@ -64,37 +65,48 @@ namespace PresentationLayer.ViewModel
         // Methods bound to commands
         private void RestockProduct(object parameter)
         {
-            if (parameter is Tuple<int, string, int> tuple)
-            {
-                int productId = tuple.Item1;
-                string productName = tuple.Item2;
-                int quantity = tuple.Item3;
+            if (!(parameter is Tuple<int, string, int> tuple)) return;
 
-                _model.RestockProduct(productId, productName, quantity);
+            int productId = tuple.Item1;
+            string productName = tuple.Item2;
+            int quantity = tuple.Item3;
+
+            if (_model.RestockProduct(productId, productName, quantity))
+            {
                 ProductCatalog.Add(new CatalogProduct(productId, productName));
                 Inventory.Add(new InventoryProduct(productId, quantity));
                 Invoices.Add($"Received {quantity} units of product {productName}");
+            }
+            else
+            {
+                // Handle error or display message to the user
             }
         }
 
         private void FulfillOrder(object parameter)
         {
-            if (parameter is Tuple<int, int> tuple)
-            {
-                int productId = tuple.Item1;
-                int quantity = tuple.Item2;
+            if (!(parameter is Tuple<int, int> tuple)) return;
 
-                _model.FulfillOrder(productId, quantity);
+            int productId = tuple.Item1;
+            int quantity = tuple.Item2;
+
+            if (_model.FulfillOrder(productId, quantity))
+            {
                 var product = Inventory.FirstOrDefault(p => p.Id == productId);
                 if (product != null)
                 {
                     product.Quantity -= quantity;
                 }
+
                 var catalogProduct = ProductCatalog.FirstOrDefault(p => p.Id == productId);
                 if (catalogProduct != null)
                 {
                     Invoices.Add($"Shipped {quantity} units of product {catalogProduct.Name}");
                 }
+            }
+            else
+            {
+                // Handle error or display message to the user
             }
         }
     }

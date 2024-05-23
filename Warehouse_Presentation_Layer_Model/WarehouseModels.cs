@@ -2,50 +2,57 @@
 
 namespace PresentationLayer.Model
 {
-    public abstract class ModelAPI
-    {
-        public abstract IEnumerable<Staff> GetStaff();
-        public abstract IEnumerable<CatalogProduct> GetProductCatalog();
-        public abstract IEnumerable<InventoryProduct> GetInventory();
-        public abstract IEnumerable<string> GetInvoices();
 
-        public static ModelAPI Create(WarehouseLogicAPI logicAPI)
+    public static class Converter
+    {
+        public static Staff ToPresentationStaff(this WarehouseDataLayer.Staff staff)
         {
-            return new ModelImplementation(logicAPI);
+            return new Staff(staff.FirstName, staff.LastName, staff.Id);
+        }
+
+        public static CatalogProduct ToPresentationCatalogProduct(this WarehouseDataLayer.CatalogProduct product)
+        {
+            return new CatalogProduct(product.Id, product.Name);
+        }
+
+        public static InventoryProduct ToPresentationInventoryProduct(this WarehouseDataLayer.InventoryProduct product)
+        {
+            return new InventoryProduct(product.Id, product.Quantity);
         }
     }
 
+
     public class ModelImplementation : ModelAPI
     {
-        private readonly WarehouseLogicAPI _logicAPI;
+        private readonly WarehouseLogicLayer.WarehouseLogicAPI _logicAPI;
 
-        public ModelImplementation(WarehouseLogicAPI logicAPI)
+        public ModelImplementation(WarehouseLogicLayer.WarehouseLogicAPI logicAPI)
         {
             _logicAPI = logicAPI;
         }
 
         public override IEnumerable<Staff> GetStaff()
         {
-            return _logicAPI._warehouse.Staff;
+            return _logicAPI.Staff.Select(s => s.ToPresentationStaff());
         }
 
         public override IEnumerable<CatalogProduct> GetProductCatalog()
         {
-            return _logicAPI._warehouse.ProductCatalog;
+            return _logicAPI.ProductCatalog.Select(p => p.ToPresentationCatalogProduct());
         }
 
         public override IEnumerable<InventoryProduct> GetInventory()
         {
-            return _logicAPI._warehouse.Inventory;
+            return _logicAPI.Inventory.Select(p => p.ToPresentationInventoryProduct());
         }
 
         public override IEnumerable<string> GetInvoices()
         {
-            return _logicAPI._warehouse.Invoices.Values;
+            return _logicAPI.Invoices;
         }
     }
 
-        public class CatalogProduct
+    public class CatalogProduct
         {
             public int Id { get; set; }
             public string Name { get; set; }

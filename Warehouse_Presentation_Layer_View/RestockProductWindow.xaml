@@ -1,0 +1,14 @@
+﻿<Window x:Class="WarehousePresentationLayer.RestockProductWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Restock Product" Height="200" Width="400">
+    <Grid>
+        <StackPanel Margin="10">
+            <TextBlock Text="Product ID:" Margin="5"/>
+            <TextBox Name="ProductIdTextBox" Margin="5"/>
+            <TextBlock Text="Quantity:" Margin="5"/>
+            <TextBox Name="QuantityTextBox" Margin="5"/>
+            <Button Content="Restock" Click="RestockButton_Click" Width="100" Margin="10" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Window>
