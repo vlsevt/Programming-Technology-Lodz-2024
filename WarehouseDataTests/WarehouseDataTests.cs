@@ -5,7 +5,7 @@ using WarehouseDataLayer;
 [TestFixture]
 public class WarehouseDataTests
 {
-    private WarehouseDataAPI warehouse;
+    private IWarehouseDataAPI warehouse;
     private int idOfProductA;
     private int idOfProductB;
 

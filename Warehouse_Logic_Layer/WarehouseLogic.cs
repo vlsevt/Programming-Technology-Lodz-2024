@@ -4,12 +4,7 @@ namespace WarehouseLogicLayer
 {
     public class WarehouseLogic : WarehouseLogicAPI
     {
-        private new readonly IWarehouseDataAPI _warehouse;
-
-        public WarehouseLogic(IWarehouseDataAPI warehouse) : base(warehouse)
-        {
-            _warehouse = warehouse;
-        }
+        public WarehouseLogic(IWarehouseDataAPI warehouse) : base(warehouse) { }
 
         public override bool RestockProduct(int productId, string productName, int quantity)
         {

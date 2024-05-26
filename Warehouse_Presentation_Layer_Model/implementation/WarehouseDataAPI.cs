@@ -1,4 +1,4 @@
-﻿namespace PresentationLayer.Model
+﻿namespace Warehouse_Presentation_Layer_Model.implementation
 {
     public interface IWarehouseDataAPI
     {

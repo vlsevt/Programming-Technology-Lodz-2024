@@ -7,7 +7,7 @@ using WarehouseDataLayer;
 
 namespace WarehouseLogicTests
 {
-    internal class WarehouseDataMock : WarehouseDataAPI
+    internal class WarehouseDataMock : IWarehouseDataAPI
     {
         public List<CatalogProduct> ProductCatalog { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public Dictionary<int, string> Invoices { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

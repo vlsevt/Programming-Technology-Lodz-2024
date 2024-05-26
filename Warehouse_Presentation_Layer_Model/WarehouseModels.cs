@@ -50,6 +50,16 @@ namespace PresentationLayer.Model
         {
             return _logicAPI.Invoices;
         }
+
+        public override int RestockProduct(int productId, int quantity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool FulfillOrder(int productId, int quantity)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class CatalogProduct
