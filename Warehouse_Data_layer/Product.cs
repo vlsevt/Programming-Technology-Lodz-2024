@@ -3,13 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WarehouseDataLayer.APIs;
 
 namespace WarehouseDataLayer
 {
-    public class Product (int Id, int Quantity, string Name)
+    internal class Product: IProduct
     {
-        public int Id { get; set; } = Id;
-        public int Quantity { get; set; } = Quantity;
-        public string Name { get; set; } = Name;
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Producer { get; set; }
+        public string Description { get; set; }
+
+        public Product(int ID, string Name, string Producer, string Description)
+        {
+            this.ID = ID;
+            this.Name = Name;
+            this.Producer = Producer;
+            this.Description = Description;
+        }
     }
 }
