@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace WarehouseLogicLayer.API
 {
-    public interface IUserDTO
+    public interface IOrderDTO
     {
         int ID { get; set; }
-        string Name { get; set; }
-        string Surname { get; set; }
+        int UserID { get; set; }
+        int StateID { get; set; }
+        DateTime Date { get; set; }
+        public int? Quantity { get; set; }
     }
 }

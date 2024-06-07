@@ -1,12 +1,12 @@
-﻿using LibraryData.API;
-using LibraryLogic.API;
+﻿using WarehouseDataLayer.APIs;
+using WarehouseLogicLayer.API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryLogic
+namespace WarehouseLogicLayer
 {
     internal class StateCRUD : IStateCRUD
     {
@@ -17,41 +17,41 @@ namespace LibraryLogic
             this._dataRepository = dataRepository;
         }
 
-        private IStateDTO Map(IState state)
+        private IStateDTO Map(IState State)
         {
-            return new StateDTO(state.Id, state.bookId, state.bookQuantity);
+            return new StateDTO(State.ID, State.ProductID, State.Quantity);
         }
 
-        public void AddState(int stateId, int bookId, int bookQuantity)
+        public void AddState(int StateId, int ProductID, int Quantity)
         {
-            this._dataRepository.AddState(stateId, bookId, bookQuantity);
+            this._dataRepository.AddState(StateId, ProductID, Quantity);
         }
 
-        public IStateDTO GetState(int stateId)
+        public IStateDTO GetState(int StateId)
         {
-            return this.Map(this._dataRepository.GetState(stateId));
+            return this.Map(this._dataRepository.GetState(StateId));
         }
 
         public Dictionary<int, IStateDTO> GetStates()
         {
-            Dictionary<int, IStateDTO> states = new Dictionary<int, IStateDTO>();
+            Dictionary<int, IStateDTO> States = new Dictionary<int, IStateDTO>();
 
-            foreach (IState state in (this._dataRepository.GetStates()).Values)
+            foreach (IState State in (this._dataRepository.GetStates()).Values)
             {
-                states.Add(state.Id, this.Map(state));
+                States.Add(State.ID, this.Map(State));
             }
 
-            return states;
+            return States;
         }
 
-        public void UpdateState(int stateId, int bookId, int bookQuantity)
+        public void UpdateState(int StateId, int ProductID, int Quantity)
         {
-            this._dataRepository.UpdateState(stateId, bookId, bookQuantity);
+            this._dataRepository.UpdateState(StateId, ProductID, Quantity);
         }
 
-        public void DeleteState(int stateId)
+        public void DeleteState(int StateId)
         {
-            this._dataRepository.DeleteState(stateId);
+            this._dataRepository.DeleteState(StateId);
         }
     }
 }

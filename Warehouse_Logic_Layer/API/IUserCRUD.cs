@@ -1,11 +1,11 @@
-﻿using LibraryData.API;
+﻿using WarehouseDataLayer.API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryLogic.API
+namespace WarehouseLogicLayer.API
 {
     public interface IUserCRUD
     {
@@ -14,10 +14,10 @@ namespace LibraryLogic.API
             return new UserCRUD(dataRepository ?? IDataRepository.CreateDatabase());
         }
 
-        void AddUser(int userId, string name, string surname);
-        IUserDTO GetUser(int userId);
+        void AddUser(int UserID, string Name, string Surname);
+        IUserDTO GetUser(int UserID);
         Dictionary<int, IUserDTO> GetUsers();
-        void UpdateUser(int userId, string name, string surname);
-        void DeleteUser(int userId);
+        void UpdateUser(int UserID, string Name, string Surname);
+        void DeleteUser(int UserID);
     }
 }

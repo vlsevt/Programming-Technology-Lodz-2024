@@ -14,10 +14,10 @@ namespace WarehouseLogicLayer.API
             return new ProductCRUD(dataRepository ?? IDataRepository.CreateDatabase());
         }
 
-        void AddProduct(int ProductId, string author, string name);
-        IProductDTO GetProduct(int ProductId);
+        void AddProduct(int ProductID, string Name, string Producer, string Description);
+        IProductDTO GetProduct(int ProductID);
         Dictionary<int, IProductDTO> GetProducts();
-        void UpdateProduct(int ProductId, string author, string name);
-        void DeleteProduct(int ProductId);
+        void UpdateProduct(int ProductID, string Name, string Producer, string Description);
+        void DeleteProduct(int ProductID);
     }
 }

@@ -1,11 +1,11 @@
-﻿using LibraryData.API;
+﻿using WarehouseDataLayer.API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryLogic.API
+namespace WarehouseLogicLayer.API
 {
     public interface IStateCRUD
     {
@@ -14,10 +14,10 @@ namespace LibraryLogic.API
             return new StateCRUD(dataRepository ?? IDataRepository.CreateDatabase());
         }
 
-        void AddState(int stateId, int bookId, int bookQuantity);
-        IStateDTO GetState(int stateId);
+        void AddState(int StateID, int ProductID, int Quantity);
+        IStateDTO GetState(int StateID);
         Dictionary<int, IStateDTO> GetStates();
-        void UpdateState(int stateId, int bookId, int bookQuantity);
-        void DeleteState(int stateId);
+        void UpdateState(int StateID, int ProductID, int Quantity);
+        void DeleteState(int StateID);
     }
 }

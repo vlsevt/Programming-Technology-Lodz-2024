@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryLogic.API
+namespace WarehouseLogicLayer.API
 {
     public interface IStateDTO
     {
-        int Id { get; set; }
-        int bookId { get; set; }
-        int bookQuantity { get; set; }
+        int ID { get; set; }
+        int ProductID { get; set; }
+        int Quantity { get; set; }
     }
 }

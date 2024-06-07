@@ -1,23 +1,23 @@
-﻿using LibraryLogic.API;
+﻿using WarehouseLogicLayer.API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryLogic
+namespace WarehouseLogicLayer
 {
     internal class StateDTO : IStateDTO
     {
-        public int Id { get; set; }
-        public int bookId { get; set; }
-        public int bookQuantity { get; set; }
+        public int ID { get; set; }
+        public int ProductID { get; set; }
+        public int Quantity { get; set; }
 
-        public StateDTO(int id, int bookId, int bookQuantity)
+        public StateDTO(int id, int ProductID, int Quantity)
         {
-            this.Id = id;
-            this.bookId = bookId;
-            this.bookQuantity = bookQuantity;
+            this.ID = ID;
+            this.ProductID = ProductID;
+            this.Quantity = Quantity;
         }
     }
 }

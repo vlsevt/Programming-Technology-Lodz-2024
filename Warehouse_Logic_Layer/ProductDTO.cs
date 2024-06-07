@@ -7,17 +7,19 @@ using System.Threading.Tasks;
 
 namespace WarehouseLogicLayer
 {
-    internal class UserDTO : IUserDTO
+    internal class ProductDTO : IProductDTO
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Surname { get; set; }
+        public string Producer { get; set; }
+        public string Description { get; set; }
 
-        public UserDTO(int ID, string Name, string Surname)
+        public ProductDTO(int ID, string Name, string Producer, string Description)
         {
             this.ID = ID;
             this.Name = Name;
-            this.Surname = Surname;
+            this.Producer = Producer;
+            this.Description = Description;
         }
     }
 }

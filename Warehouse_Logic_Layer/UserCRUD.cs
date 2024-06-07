@@ -1,12 +1,12 @@
-﻿using LibraryData.API;
-using LibraryLogic.API;
+﻿using WarehouseDataLayer.APIs;
+using WarehouseLogicLayer.API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryLogic
+namespace WarehouseLogicLayer
 {
     internal class UserCRUD : IUserCRUD
     {
@@ -17,41 +17,42 @@ namespace LibraryLogic
             this._dataRepository = dataRepository;
         }
 
-        private IUserDTO Map(IUser user)
+        private IUserDTO Map(IUser User)
         {
-            return new UserDTO(user.Id, user.Name, user.Surname);
+            return new UserDTO(User.ID, User.Name, User.Surname);
         }
 
-        public void AddUser(int userId, string name, string surname)
+        public void AddUser(int UserID, string Name, string Surname)
         {
-            this._dataRepository.AddUser(userId, name, surname);
+            this._dataRepository.AddUser(UserID, Name, Surname);
         }
 
-        public IUserDTO GetUser(int userId)
+        public IUserDTO GetUser(int UserID)
         {
-            return this.Map(this._dataRepository.GetUser(userId));
+            return this.Map(this._dataRepository.GetUser(UserID));
         }
 
         public Dictionary<int, IUserDTO> GetUsers()
         {
-            Dictionary<int, IUserDTO> users = new Dictionary<int, IUserDTO>();
+            Dictionary<int, IUserDTO> Users = new Dictionary<int, IUserDTO>();
 
-            foreach (IUser user in (this._dataRepository.GetUsers()).Values)
+            foreach (IUser User in (this._dataRepository.GetUsers()).Values)
             {
-                users.Add(user.Id, this.Map(user));
+                Users.Add(User.ID, this.Map(User));
             }
 
-            return users;
+            return Users;
         }
 
-        public void UpdateUser(int userId, string name, string surname)
+        public void UpdateUser(int UserID, string Name, string Surname)
         {
-            this._dataRepository.UpdateUser(userId, name, surname);
+            this._dataRepository.UpdateUser(UserID, Name, Surname);
         }
 
-        public void DeleteUser(int userId)
+        public void DeleteUser(int UserID)
         {
-            this._dataRepository.DeleteUser(userId);
+            this._dataRepository.DeleteUser(UserID);
         }
     }
 }
+
