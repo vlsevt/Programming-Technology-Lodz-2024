@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 using WarehouseDataLayer;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace LibraryData
+namespace WarehouseData
 {
     internal class DataRepository : IDataRepository
     {
@@ -23,17 +23,16 @@ namespace LibraryData
             this._context = context;
         }
 
-        #region User
 
-        public void AddUser(int userId, string name, string surname)
+        public void AddUser(int UserID, string name, string surname)
         {
-            IUser user = new User(userId, name, surname);
+            IUser user = new User(UserID, name, surname);
             _context.AddUser(user);
         }
 
-        public IUser GetUser(int userId)
+        public IUser GetUser(int UserID)
         {
-            IUser? user = this._context.GetUser(userId);
+            IUser? user = this._context.GetUser(UserID);
 
             if (user is null)
                 throw new Exception("User doesn't exist");
@@ -46,89 +45,87 @@ namespace LibraryData
             return _context.GetUsers();
         }
 
-        public void UpdateUser(int userId, string name, string surname)
+        public void UpdateUser(int UserID, string name, string surname)
         {
 
-            IUser user = new User(userId, name, surname);
+            IUser user = new User(UserID, name, surname);
 
-            if (this.GetUser(userId) == null)
+            if (this.GetUser(UserID) == null)
                 throw new ArgumentNullException("User doesn't exist");
 
             this._context.UpdateUser(user);
         }
 
-        public void DeleteUser(int userId)
+        public void DeleteUser(int UserID)
         {
-            if (this.GetUser(userId) == null)
+            if (this.GetUser(UserID) == null)
                 throw new ArgumentNullException(nameof(User));
 
-            this._context.DeleteUser(userId);
+            this._context.DeleteUser(UserID);
         }
 
-        #endregion
+        
 
 
-        #region Book
 
-        public void AddBook(int bookId, string author, string name)
+        public void AddProduct(int ProductID, string Name, string Producer, string Description)
         {
-            IBook book = new Book(bookId, author, name);
-            _context.AddBook(book);
+            IProduct Product = new Product(ProductID, Name, Producer, Description);
+            _context.AddProduct(Product);
         }
 
-        public IBook GetBook(int bookId)
+        public IProduct GetProduct(int ProductID)
         {
-            IBook? book = this._context.GetBook(bookId);
+            IProduct? Product = this._context.GetProduct(ProductID);
 
-            if (book is null)
-                throw new Exception("Book doesn't exist");
+            if (Product is null)
+                throw new Exception("Product doesn't exist");
 
-            return book;
+            return Product;
         }
 
-        public Dictionary<int, IBook> GetBooks()
+        public Dictionary<int, IProduct> GetProducts()
         {
-            return _context.GetBooks();
+            return _context.GetProducts();
         }
 
-        public void UpdateBook(int bookId, string author, string name)
+        public void UpdateProduct(int ProductID, string Name, string Producer, string Description)
         {
-            IBook book = new Book(bookId, author, name);
+            IProduct Product = new Product(ProductID, Name, Producer, Description);
 
-            if (this.GetBook(bookId) == null)
-                throw new ArgumentNullException("Book doesn't exist");
+            if (this.GetProduct(ProductID) == null)
+                throw new ArgumentNullException("Product doesn't exist");
 
-            this._context.UpdateBook(book);
+            this._context.UpdateProduct(Product);
         }
 
-        public void DeleteBook(int bookId)
+        public void DeleteProduct(int ProductID)
         {
-            if (this.GetBook(bookId) == null)
-                throw new ArgumentNullException(nameof(Book));
+            if (this.GetProduct(ProductID) == null)
+                throw new ArgumentNullException(nameof(Product));
 
-            this._context.DeleteBook(bookId);
+            this._context.DeleteProduct(ProductID);
         }
 
-        #endregion
+        
 
 
-        #region State
 
-        public void AddState(int stateId, int bookId, int bookQuantity)
+        public void AddState(int StateID, int ProductID, int Quantity)
         {
-            if (this.GetBook(bookId) == null)
-                throw new Exception("Book doesn't exist");
+            if (this.GetProduct(ProductID) == null)
+                throw new Exception("Product doesn't exist");
 
-            if (bookQuantity <= 0)
-                throw new Exception("Books quantity must be graete than 0");
+            if (Quantity <= 0)
+                throw new Exception("Products quantity must be graete than 0");
 
-            IState state = new State(stateId, bookId, bookQuantity);
+            IState state = new State(StateID, ProductID, Quantity);
             _context.AddState(state);
         }
 
-        public IState GetState(int stateId)
+        public IState GetState(int StateID)
         {
-            IState? state = this._context.GetState(stateId);
+            IState? state = this._context.GetState(StateID);
 
             if (state is null)
                 throw new Exception("State doesn't exist");
@@ -141,78 +138,76 @@ namespace LibraryData
             return _context.GetStates();
         }
 
-        public void UpdateState(int stateId, int bookId, int bookQuantity)
+        public void UpdateState(int StateID, int ProductID, int Quantity)
         {
-            if (this.GetBook(bookId) == null)
-                throw new Exception("Book doesn't exist");
+            if (this.GetProduct(ProductID) == null)
+                throw new Exception("Product doesn't exist");
 
-            if (bookQuantity <= 0)
-                throw new Exception("Books quantity must be graete than 0");
+            if (Quantity <= 0)
+                throw new Exception("Products quantity must be graete than 0");
 
-            IState state = new State(stateId, bookId, bookQuantity);
+            IState state = new State(StateID, ProductID, Quantity);
 
-            if (this.GetState(stateId) == null)
+            if (this.GetState(StateID) == null)
                 throw new ArgumentNullException("State doesn't exist");
 
             this._context.UpdateState(state);
         }
 
-        public void DeleteState(int stateId)
+        public void DeleteState(int StateID)
         {
-            if (this.GetState(stateId) == null)
+            if (this.GetState(StateID) == null)
                 throw new ArgumentNullException("State doesn't exist");
 
-            this._context.DeleteState(stateId);
+            this._context.DeleteState(StateID);
         }
 
-        #endregion
+        
 
 
-        #region Borrowing
-
-        public void AddBorrowing(int borrowingId, int userId, int stateId, int bookQuantity = 0)
+        public void AddOrder(int OrderId, int UserID, int StateID, int Quantity = 0)
         {
-            IUser user = this.GetUser(userId);
-            IState state = this.GetState(stateId);
-            IBook book = this.GetBook(state.bookId);
+            IUser user = this.GetUser(UserID);
+            IState state = this.GetState(StateID);
+            IProduct Product = this.GetProduct(state.ProductID);
 
-            IBorrowing borrowing = new Borrowing(borrowingId, userId, stateId, DateTime.Now, bookQuantity);
-            _context.AddBorrowing(borrowing);
+            IOrder Order = new Order(OrderId, UserID, StateID, DateTime.Now, Quantity);
+            _context.AddOrder(Order);
         }
 
-        public IBorrowing GetBorrowing(int borrowingId)
+        public IOrder GetOrder(int OrderId)
         {
-            IBorrowing? borrowing = this._context.GetBorrowing(borrowingId);
+            IOrder? Order = this._context.GetOrder(OrderId);
 
-            if (borrowing is null)
-                throw new Exception("Borrowing doesn't exist");
+            if (Order is null)
+                throw new Exception("Order doesn't exist");
 
-            return borrowing;
+            return Order;
         }
 
-        public Dictionary<int, IBorrowing> GetBorrowings()
+        public Dictionary<int, IOrder> GetOrders()
         {
-            return _context.GetBorrowings();
+            return _context.GetOrders();
         }
 
-        public void UpdateBorrowing(int borrowingId, int userId, int stateId, DateTime Date, int? bookQuantity)
+        public void UpdateOrder(int OrderId, int UserID, int StateID, DateTime Date, int? Quantity)
         {
-            IBorrowing borrowing = new Borrowing(borrowingId, userId, stateId, Date, bookQuantity);
+            IOrder Order = new Order(OrderId, UserID, StateID, Date, Quantity);
 
-            if (this.GetBorrowing(borrowingId) == null)
-                throw new ArgumentNullException("Borrowing doesn't exist");
+            if (this.GetOrder(OrderId) == null)
+                throw new ArgumentNullException("Order doesn't exist");
 
-            this._context.UpdateBorrowing(borrowing);
+            this._context.UpdateOrder(Order);
         }
 
-        public void DeleteBorrowing(int borrowingId)
+        public void DeleteOrder(int OrderId)
         {
-            if (this.GetBorrowing(borrowingId) == null)
-                throw new ArgumentNullException("Borrowing doesn't exist");
+            if (this.GetOrder(OrderId) == null)
+                throw new ArgumentNullException("Order doesn't exist");
 
-            this._context.DeleteBorrowing(borrowingId);
+            this._context.DeleteOrder(OrderId);
         }
 
-        #endregion
+        
     }
 }

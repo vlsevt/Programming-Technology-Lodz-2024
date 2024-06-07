@@ -34,7 +34,7 @@ namespace WarehouseData
         {
             using (WarehouseDataContext context = new WarehouseDataContext(this.ConnectionString))
             {
-                Database.User entity = new Database.User()
+                WarehouseDataLayer.Database.User entity = new WarehouseDataLayer.Database.User()
                 {
                     ID = User.ID,
                     Name = User.Name,
@@ -50,12 +50,12 @@ namespace WarehouseData
         {
             using (WarehouseDataContext context = new WarehouseDataContext(this.ConnectionString))
             {
-                IQueryable<Database.User> query =
+                IQueryable<WarehouseDataLayer.Database.User> query =
                     from u in context.Users
                     where u.ID == UserID
                     select u;
 
-                Database.User? User = query.FirstOrDefault();
+                WarehouseDataLayer.Database.User? User = query.FirstOrDefault();
 
                 return User is not null ? new User(User.ID, User.Name, User.Surname) : null;
             }
@@ -77,7 +77,7 @@ namespace WarehouseData
         {
             using (WarehouseDataContext context = new WarehouseDataContext(this.ConnectionString))
             {
-                Database.User toUpdate = (from u in context.Users where u.ID == User.ID select u).FirstOrDefault()!;
+                WarehouseDataLayer.Database.User toUpdate = (from u in context.Users where u.ID == User.ID select u).FirstOrDefault()!;
 
                 toUpdate.Name = User.Name;
                 toUpdate.Surname = User.Surname;
@@ -90,7 +90,7 @@ namespace WarehouseData
         {
             using (WarehouseDataContext context = new WarehouseDataContext(this.ConnectionString))
             {
-                Database.User toDelete = (from u in context.Users where u.ID == UserID select u).FirstOrDefault()!;
+                WarehouseDataLayer.Database.User toDelete = (from u in context.Users where u.ID == UserID select u).FirstOrDefault()!;
 
                 context.Users.DeleteOnSubmit(toDelete);
 
@@ -104,9 +104,9 @@ namespace WarehouseData
         {
             using (WarehouseDataContext context = new WarehouseDataContext(this.ConnectionString))
             {
-                Database.Product entity = new Database.Product()
+                WarehouseDataLayer.Database.Product entity = new WarehouseDataLayer.Database.Product()
                 {
-                    Id = Product.ID,
+                    ID = Product.ID,
                     Name = Product.Name,
                     Producer = Product.Producer,
                     Description = Product.Description,
@@ -121,12 +121,12 @@ namespace WarehouseData
         {
             using (WarehouseDataContext context = new WarehouseDataContext(this.ConnectionString))
             {
-                IQueryable<Database.Product> query =
+                IQueryable<WarehouseDataLayer.Database.Product> query =
                     from p in context.Products
                     where p.ID == ProductID
                     select p;
 
-                Database.Product? Product = query.FirstOrDefault();
+                WarehouseDataLayer.Database.Product? Product = query.FirstOrDefault();
 
                 return Product is not null ? new Product(Product.ID, Product.Producer, Product.Name, Product.Description) : null;
             }
@@ -148,7 +148,7 @@ namespace WarehouseData
         {
             using (WarehouseDataContext context = new WarehouseDataContext(this.ConnectionString))
             {
-                Database.Product toUpdate = (from p in context.Products where p.ID == Product.ID select p).FirstOrDefault()!;
+                WarehouseDataLayer.Database.Product toUpdate = (from p in context.Products where p.ID == Product.ID select p).FirstOrDefault()!;
 
                 toUpdate.Producer = Product.Producer;
                 toUpdate.Name = Product.Name;
@@ -162,7 +162,7 @@ namespace WarehouseData
         {
             using (WarehouseDataContext context = new WarehouseDataContext(this.ConnectionString))
             {
-                Database.Product toDelete = (from p in context.Products where p.ID == ProductID select p).FirstOrDefault()!;
+                WarehouseDataLayer.Database.Product toDelete = (from p in context.Products where p.ID == ProductID select p).FirstOrDefault()!;
 
                 context.Products.DeleteOnSubmit(toDelete);
 
@@ -176,7 +176,7 @@ namespace WarehouseData
         {
             using (WarehouseDataContext context = new WarehouseDataContext(this.ConnectionString))
             {
-                Database.State entity = new Database.State()
+                WarehouseDataLayer.Database.State entity = new WarehouseDataLayer.Database.State()
                 {
                     ID = State.ID,
                     ProductID = State.ProductID,
@@ -192,12 +192,12 @@ namespace WarehouseData
         {
             using (WarehouseDataContext context = new WarehouseDataContext(this.ConnectionString))
             {
-                IQueryable<Database.State> query =
+                IQueryable<WarehouseDataLayer.Database.State> query =
                     from s in context.States
                     where s.ID == StateID
                     select s;
 
-                Database.State? State = query.FirstOrDefault();
+                WarehouseDataLayer.Database.State? State = query.FirstOrDefault();
 
                 return State is not null ? new State(State.ID, State.ProductID, State.Quantity) : null;
             }
@@ -219,7 +219,7 @@ namespace WarehouseData
         {
             using (WarehouseDataContext context = new WarehouseDataContext(this.ConnectionString))
             {
-                Database.State toUpdate = (from s in context.States where s.ID == State.ID select s).FirstOrDefault()!;
+                WarehouseDataLayer.Database.State toUpdate = (from s in context.States where s.ID == State.ID select s).FirstOrDefault()!;
 
                 toUpdate.ProductID = State.ProductID;
                 toUpdate.Quantity = State.Quantity;
@@ -232,7 +232,7 @@ namespace WarehouseData
         {
             using (WarehouseDataContext context = new WarehouseDataContext(this.ConnectionString))
             {
-                Database.State toDelete = (from s in context.States where s.ID == StateID select s).FirstOrDefault()!;
+                WarehouseDataLayer.Database.State toDelete = (from s in context.States where s.ID == StateID select s).FirstOrDefault()!;
 
                 context.States.DeleteOnSubmit(toDelete);
 
@@ -247,7 +247,7 @@ namespace WarehouseData
         {
             using (WarehouseDataContext context = new WarehouseDataContext(this.ConnectionString))
             {
-                Database.Order entity = new Database.Order()
+                WarehouseDataLayer.Database.Order entity = new WarehouseDataLayer.Database.Order()
                 {
                     ID = Order.ID,
                     UserID = Order.UserID,
@@ -265,12 +265,12 @@ namespace WarehouseData
         {
             using (WarehouseDataContext context = new WarehouseDataContext(this.ConnectionString))
             {
-                IQueryable<Database.Order> query =
+                IQueryable<WarehouseDataLayer.Database.Order> query =
                     from p in context.Orders
                     where p.ID == OrderID
                     select p;
 
-                Database.Order? Order = query.FirstOrDefault();
+                WarehouseDataLayer.Database.Order? Order = query.FirstOrDefault();
 
                 return Order is not null ? new Order(Order.ID, Order.UserID, Order.StateID, Order.Date, Order.Quantity) : null;
             }
@@ -282,7 +282,7 @@ namespace WarehouseData
             {
                 IQueryable<IOrder> query =
                     from p in context.Orders
-                    select new Order(p.Id, p.UserID, p.StateID, p.Date, p.Quantity) as IOrder;
+                    select new Order(p.ID, p.UserID, p.StateID, p.Date, p.Quantity) as IOrder;
 
                 return query.ToDictionary(k => k.ID);
             }
@@ -292,7 +292,7 @@ namespace WarehouseData
         {
             using (WarehouseDataContext context = new WarehouseDataContext(this.ConnectionString))
             {
-                Database.Order toUpdate = (from p in context.Orders where p.ID == Order.ID select p).FirstOrDefault()!;
+                WarehouseDataLayer.Database.Order toUpdate = (from p in context.Orders where p.ID == Order.ID select p).FirstOrDefault()!;
 
                 toUpdate.UserID = Order.UserID;
                 toUpdate.StateID = Order.StateID;
@@ -307,7 +307,7 @@ namespace WarehouseData
         {
             using (WarehouseDataContext context = new WarehouseDataContext(this.ConnectionString))
             {
-                Database.Order toDelete = (from p in context.Orders where p.ID == OrderID select p).FirstOrDefault()!;
+                WarehouseDataLayer.Database.Order toDelete = (from p in context.Orders where p.ID == OrderID select p).FirstOrDefault()!;
 
                 context.Orders.DeleteOnSubmit(toDelete);
 
