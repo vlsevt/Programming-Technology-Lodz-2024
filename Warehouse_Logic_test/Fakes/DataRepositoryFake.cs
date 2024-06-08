@@ -108,7 +108,7 @@ namespace WarehouseLogicLayer.Fake
 
         public void AddOrder(int OrderID, int UserID, int StateID, int Quantity = 0)
         {
-            IUser user = this.GetUser(UserID);
+            IUser User = this.GetUser(UserID);
             IState state = this.GetState(StateID);
             IProduct Product = this.GetProduct(state.ProductID);
 

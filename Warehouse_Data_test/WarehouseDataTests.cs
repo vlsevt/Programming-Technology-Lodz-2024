@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using WarehouseData;
 using WarehouseDataLayer.APIs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NUnit.Framework;
 
 namespace WarehouseDataTest
 {
@@ -34,30 +33,30 @@ namespace WarehouseDataTest
         {
             int UserID = 1;
 
-            _dataRepository.AddUser(UserID, "John", "Wick");
+            _dataRepository.AddUser(UserID, "John", "Wrublevski");
 
-            IUser user = _dataRepository.GetUser(UserID);
+            IUser User = _dataRepository.GetUser(UserID);
 
-            Assert.IsNotNull(user);
-            Assert.AreEqual(UserID, user.ID);
-            Assert.AreEqual("John", user.Name);
-            Assert.AreEqual("Wick", user.Surname);
+            Assert.IsNotNull(User);
+            Assert.AreEqual(UserID, User.ID);
+            Assert.AreEqual("John", User.Name);
+            Assert.AreEqual("Wrublevski", User.Surname);
 
             Assert.IsNotNull(_dataRepository.GetUsers());
 
             Assert.ThrowsException<Exception>(() => _dataRepository.GetUser(UserID + 2));
 
-            _dataRepository.UpdateUser(UserID, "Kate", "Baffen");
+            _dataRepository.UpdateUser(UserID, "Marisa", "Bunner");
 
-            IUser userUpdated = _dataRepository.GetUser(UserID);
+            IUser UserUpdated = _dataRepository.GetUser(UserID);
 
-            Assert.IsNotNull(userUpdated);
-            Assert.AreEqual(UserID, userUpdated.ID);
-            Assert.AreEqual("Kate", userUpdated.Name);
-            Assert.AreEqual("Baffen", userUpdated.Surname);
+            Assert.IsNotNull(UserUpdated);
+            Assert.AreEqual(UserID, UserUpdated.ID);
+            Assert.AreEqual("Marisa", UserUpdated.Name);
+            Assert.AreEqual("Bunner", UserUpdated.Surname);
 
             Assert.ThrowsException<Exception>(() => _dataRepository.UpdateUser(UserID + 2,
-                "Kate", "Baffen"));
+                "Marisa", "Bunner"));
 
             _dataRepository.DeleteUser(UserID);
             Assert.ThrowsException<Exception>(() => _dataRepository.GetUser(UserID));
@@ -162,7 +161,7 @@ namespace WarehouseDataTest
 
             IProduct Product = _dataRepository.GetProduct(ProductID);
             IState State = _dataRepository.GetState(StateID);
-            IUser user = _dataRepository.GetUser(UserID);
+            IUser User = _dataRepository.GetUser(UserID);
 
             _dataRepository.AddOrder(OrderID, UserID, StateID);
 

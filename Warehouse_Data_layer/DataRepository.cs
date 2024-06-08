@@ -26,18 +26,18 @@ namespace WarehouseData
 
         public void AddUser(int UserID, string name, string surname)
         {
-            IUser user = new User(UserID, name, surname);
-            _context.AddUser(user);
+            IUser User = new User(UserID, name, surname);
+            _context.AddUser(User);
         }
 
         public IUser GetUser(int UserID)
         {
-            IUser? user = this._context.GetUser(UserID);
+            IUser? User = this._context.GetUser(UserID);
 
-            if (user is null)
+            if (User is null)
                 throw new Exception("User doesn't exist");
 
-            return user;
+            return User;
         }
 
         public Dictionary<int, IUser> GetUsers()
@@ -48,12 +48,12 @@ namespace WarehouseData
         public void UpdateUser(int UserID, string name, string surname)
         {
 
-            IUser user = new User(UserID, name, surname);
+            IUser User = new User(UserID, name, surname);
 
             if (this.GetUser(UserID) == null)
                 throw new ArgumentNullException("User doesn't exist");
 
-            this._context.UpdateUser(user);
+            this._context.UpdateUser(User);
         }
 
         public void DeleteUser(int UserID)
@@ -167,7 +167,7 @@ namespace WarehouseData
 
         public void AddOrder(int OrderId, int UserID, int StateID, int Quantity = 0)
         {
-            IUser user = this.GetUser(UserID);
+            IUser User = this.GetUser(UserID);
             IState state = this.GetState(StateID);
             IProduct Product = this.GetProduct(state.ProductID);
 
