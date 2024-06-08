@@ -8,10 +8,9 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using WarehouseDataLayer;
 using System.ComponentModel;
 
-namespace WarehouseData
+namespace WarehouseDataLayer
 {
     internal class DataContext : IDataContext
     {

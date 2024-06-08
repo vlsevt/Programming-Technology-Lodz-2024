@@ -9,10 +9,9 @@ using System.Threading.Tasks;
 using WarehouseDataLayer.APIs;
 using WarehouseDataLayer.Database;
 using Microsoft.Extensions.Logging;
-using WarehouseDataLayer;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace WarehouseData
+namespace WarehouseDataLayer
 {
     internal class DataRepository : IDataRepository
     {

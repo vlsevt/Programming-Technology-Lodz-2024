@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WarehouseDataLayer.APIs;
 
-namespace LibraryData
+namespace WarehouseDataLayer
 {
     internal class User : IUser
     {

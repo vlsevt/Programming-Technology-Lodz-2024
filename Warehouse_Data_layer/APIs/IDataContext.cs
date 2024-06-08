@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using WarehouseDataLayer;
-using WarehouseData;
 
 namespace WarehouseDataLayer.APIs
 {
