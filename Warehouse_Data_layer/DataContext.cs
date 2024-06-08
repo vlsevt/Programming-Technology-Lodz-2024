@@ -197,7 +197,7 @@ namespace WarehouseDataLayer
                     select s;
 
                 WarehouseDataLayer.Database.State? State = query.FirstOrDefault();
-
+                
                 return State is not null ? new State(State.ID, State.ProductID, State.Quantity) : null;
             }
         }
@@ -252,7 +252,7 @@ namespace WarehouseDataLayer
                     UserID = Order.UserID,
                     StateID = Order.StateID,
                     Date = Order.Date,
-                    Quantity = Order.Quantity,
+                    Quantity = (int)Order.Quantity,
                 };
 
                 context.Orders.InsertOnSubmit(entity);
@@ -271,7 +271,7 @@ namespace WarehouseDataLayer
 
                 WarehouseDataLayer.Database.Order? Order = query.FirstOrDefault();
 
-                return Order is not null ? new Order(Order.ID, Order.UserID, Order.StateID, Order.Date, Order.Quantity) : null;
+                return Order is not null ? new Order(Order.ID, Order.UserID, Order.StateID, (DateTime)Order.Date, Order.Quantity) : null;
             }
         }
 
@@ -281,7 +281,7 @@ namespace WarehouseDataLayer
             {
                 IQueryable<IOrder> query =
                     from p in context.Orders
-                    select new Order(p.ID, p.UserID, p.StateID, p.Date, p.Quantity) as IOrder;
+                    select (new Order(p.ID, p.UserID, p.StateID, (DateTime)p.Date, p.Quantity) as IOrder);
 
                 return query.ToDictionary(k => k.ID);
             }
@@ -296,7 +296,7 @@ namespace WarehouseDataLayer
                 toUpdate.UserID = Order.UserID;
                 toUpdate.StateID = Order.StateID;
                 toUpdate.Date = Order.Date;
-                toUpdate.Quantity = Order.Quantity;
+                toUpdate.Quantity = (int)Order.Quantity;
 
                 context.SubmitChanges();
             }

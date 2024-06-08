@@ -47,8 +47,6 @@ namespace WarehouseLogicLayer.Fake
 
 
 
-        #region Product CRUD
-
         public void AddProduct(int ProductID, string Name, string Producer, string Description)
         {
             this.Products.Add(ProductID, new ProductFake(ProductID, Name, Producer, Description));

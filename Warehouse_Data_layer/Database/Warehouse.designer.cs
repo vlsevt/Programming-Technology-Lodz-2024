@@ -109,13 +109,13 @@ namespace WarehouseDataLayer.Database
 		
 		private int _ID;
 		
-		private System.Nullable<int> _UserID;
+		private int _UserID;
 		
-		private System.Nullable<int> _StateID;
+		private int _StateID;
 		
 		private System.Nullable<System.DateTime> _Date;
 		
-		private System.Nullable<int> _Quantity;
+		private int _Quantity;
 		
 		private EntityRef<User> _User;
 		
@@ -127,13 +127,13 @@ namespace WarehouseDataLayer.Database
     partial void OnCreated();
     partial void OnIDChanging(int value);
     partial void OnIDChanged();
-    partial void OnUserIDChanging(System.Nullable<int> value);
+    partial void OnUserIDChanging(int value);
     partial void OnUserIDChanged();
-    partial void OnStateIDChanging(System.Nullable<int> value);
+    partial void OnStateIDChanging(int value);
     partial void OnStateIDChanged();
     partial void OnDateChanging(System.Nullable<System.DateTime> value);
     partial void OnDateChanged();
-    partial void OnQuantityChanging(System.Nullable<int> value);
+    partial void OnQuantityChanging(int value);
     partial void OnQuantityChanged();
     #endregion
 		
@@ -165,7 +165,7 @@ namespace WarehouseDataLayer.Database
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int")]
-		public System.Nullable<int> UserID
+		public int UserID
 		{
 			get
 			{
@@ -189,7 +189,7 @@ namespace WarehouseDataLayer.Database
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateID", DbType="Int")]
-		public System.Nullable<int> StateID
+		public int StateID
 		{
 			get
 			{
@@ -233,7 +233,7 @@ namespace WarehouseDataLayer.Database
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int")]
-		public System.Nullable<int> Quantity
+		public int Quantity
 		{
 			get
 			{
@@ -279,7 +279,7 @@ namespace WarehouseDataLayer.Database
 					}
 					else
 					{
-						this._UserID = default(Nullable<int>);
+						this._UserID = (int)default(Nullable<int>);
 					}
 					this.SendPropertyChanged("User");
 				}
@@ -313,7 +313,7 @@ namespace WarehouseDataLayer.Database
 					}
 					else
 					{
-						this._StateID = default(Nullable<int>);
+						this._StateID = (int)default(Nullable<int>);
 					}
 					this.SendPropertyChanged("State");
 				}
@@ -649,9 +649,9 @@ namespace WarehouseDataLayer.Database
 		
 		private int _ID;
 		
-		private System.Nullable<int> _ProductID;
+		private int _ProductID;
 		
-		private System.Nullable<int> _Quantity;
+		private int _Quantity;
 		
 		private EntitySet<Order> _Orders;
 		
@@ -663,9 +663,9 @@ namespace WarehouseDataLayer.Database
     partial void OnCreated();
     partial void OnIDChanging(int value);
     partial void OnIDChanged();
-    partial void OnProductIDChanging(System.Nullable<int> value);
+    partial void OnProductIDChanging(int value);
     partial void OnProductIDChanged();
-    partial void OnQuantityChanging(System.Nullable<int> value);
+    partial void OnQuantityChanging(int value);
     partial void OnQuantityChanged();
     #endregion
 		
@@ -697,7 +697,7 @@ namespace WarehouseDataLayer.Database
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductID", DbType="Int")]
-		public System.Nullable<int> ProductID
+		public int ProductID
 		{
 			get
 			{
@@ -721,7 +721,7 @@ namespace WarehouseDataLayer.Database
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int")]
-		public System.Nullable<int> Quantity
+		public int Quantity
 		{
 			get
 			{
@@ -780,7 +780,7 @@ namespace WarehouseDataLayer.Database
 					}
 					else
 					{
-						this._ProductID = default(Nullable<int>);
+						this._ProductID = (int)default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Product");
 				}

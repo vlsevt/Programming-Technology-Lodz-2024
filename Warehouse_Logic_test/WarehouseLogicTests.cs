@@ -1,7 +1,8 @@
 using WarehouseDataLayer.APIs;
 using WarehouseDataLayer.Database;
 using WarehouseLogicLayer.API;
-using WarehouseLogicLayer.Fake;
+using WarehouseLogicLayer.Fakes;
+//using WarehouseLogicLayer.Fake;
 
 namespace WarehouseLogicTest
 {
@@ -10,7 +11,7 @@ namespace WarehouseLogicTest
     {
         //private readonly IDataRepository _dataRepository = new DataRepositoryFake();
 
-        DataRepositoryFake _dataRepository = new DataRepositoryFake();
+        WarehouseLogicLayer.Fake.DataRepositoryFake _dataRepository = new WarehouseLogicLayer.Fake.DataRepositoryFake();
 
 
         [TestMethod]
