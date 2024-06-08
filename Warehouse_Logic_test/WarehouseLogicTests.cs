@@ -53,7 +53,7 @@ namespace WarehouseLogicTest
 
             Assert.IsNotNull(Product);
             Assert.AreEqual(1, Product.ID);
-            Assert.AreEqual("Cleaning Kit", Product.Name);
+            Assert.AreEqual("Cleaning kit", Product.Name);
             Assert.AreEqual("Cecil Martin", Product.Producer);
             Assert.AreEqual("Nice thing", Product.Description);
 
@@ -65,8 +65,8 @@ namespace WarehouseLogicTest
 
             Assert.IsNotNull(updatedProduct);
             Assert.AreEqual(1, updatedProduct.ID);
-            Assert.AreEqual("Grokking Algorithms", updatedProduct.Name);
-            Assert.AreEqual("Aditya Y. Bhargava", updatedProduct.Producer);
+            Assert.AreEqual("Wild rug", updatedProduct.Name);
+            Assert.AreEqual("Aditya", updatedProduct.Producer);
             Assert.AreEqual("Nice thing", Product.Description);
 
 
@@ -80,27 +80,27 @@ namespace WarehouseLogicTest
             ProductCrud.AddProduct(1, "Cleaning kit", "Cecil Martin", "Nice thing");
             IProductDTO Product = ProductCrud.GetProduct(1);
 
-            IStateCRUD stateCrud = IStateCRUD.CreateStateCRUD(this._dataRepository);
+            IStateCRUD StateCrud = IStateCRUD.CreateStateCRUD(this._dataRepository);
 
-            stateCrud.AddState(1, Product.ID, 12);
+            StateCrud.AddState(1, Product.ID, 12);
 
-            IStateDTO state = stateCrud.GetState(1);
+            IStateDTO State = StateCrud.GetState(1);
 
-            Assert.IsNotNull(state);
-            Assert.AreEqual(1, state.ID);
-            Assert.AreEqual(Product.ID, state.ProductID);
-            Assert.AreEqual(12, state.Quantity);
+            Assert.IsNotNull(State);
+            Assert.AreEqual(1, State.ID);
+            Assert.AreEqual(Product.ID, State.ProductID);
+            Assert.AreEqual(12, State.Quantity);
 
-            stateCrud.UpdateState(1, Product.ID, 20);
+            StateCrud.UpdateState(1, Product.ID, 20);
 
-            IStateDTO updatedState = stateCrud.GetState(1);
+            IStateDTO updatedState = StateCrud.GetState(1);
 
             Assert.IsNotNull(updatedState);
             Assert.AreEqual(1, updatedState.ID);
             Assert.AreEqual(Product.ID, updatedState.ProductID);
             Assert.AreEqual(20, updatedState.Quantity);
 
-            stateCrud.DeleteState(1);
+            StateCrud.DeleteState(1);
             ProductCrud.DeleteProduct(1);
         }
 
@@ -108,38 +108,38 @@ namespace WarehouseLogicTest
         public void OrderLogicTest()
         {
             IUserCRUD UserCrud = IUserCRUD.CreateUserCRUD(this._dataRepository);
-            UserCrud.AddUser(1, "John", "Wick");
+            UserCrud.AddUser(1, "John", "Wrublevski");
             IUserDTO User = UserCrud.GetUser(1);
 
             IProductCRUD ProductCrud = IProductCRUD.CreateProductCRUD(this._dataRepository);
             ProductCrud.AddProduct(1, "Cleaning kit", "Cecil Martin", "Nice thing");
             IProductDTO Product = ProductCrud.GetProduct(1);
 
-            IStateCRUD stateCrud = IStateCRUD.CreateStateCRUD(this._dataRepository);
-            stateCrud.AddState(1, Product.ID, 12);
-            IStateDTO state = stateCrud.GetState(1);
+            IStateCRUD StateCrud = IStateCRUD.CreateStateCRUD(this._dataRepository);
+            StateCrud.AddState(1, Product.ID, 12);
+            IStateDTO State = StateCrud.GetState(1);
 
             IOrderCRUD OrderCrud = IOrderCRUD.CreateOrderCRUD(this._dataRepository);
-            OrderCrud.AddOrder(1, User.ID, state.ID, 15);
+            OrderCrud.AddOrder(1, User.ID, State.ID, 15);
             IOrderDTO Order = OrderCrud.GetOrder(1);
 
             Assert.IsNotNull(Order);
             Assert.AreEqual(1, Order.ID);
             Assert.AreEqual(User.ID, Order.UserID);
-            Assert.AreEqual(state.ID, Order.StateID);
+            Assert.AreEqual(State.ID, Order.StateID);
             Assert.AreEqual(15, Order.Quantity);
 
-            OrderCrud.UpdateOrder(Order.ID, User.ID, state.ID, DateTime.Now, 5);
+            OrderCrud.UpdateOrder(Order.ID, User.ID, State.ID, DateTime.Now, 5);
 
             IOrderDTO updatedOrder = OrderCrud.GetOrder(Order.ID);
 
             Assert.IsNotNull(updatedOrder);
             Assert.AreEqual(User.ID, updatedOrder.UserID);
-            Assert.AreEqual(state.ID, updatedOrder.StateID);
+            Assert.AreEqual(State.ID, updatedOrder.StateID);
             Assert.AreEqual(5, updatedOrder.Quantity);
 
             OrderCrud.DeleteOrder(Order.ID);
-            stateCrud.DeleteState(state.ID);
+            StateCrud.DeleteState(State.ID);
             ProductCrud.DeleteProduct(Product.ID);
             UserCrud.DeleteUser(User.ID);
         }
