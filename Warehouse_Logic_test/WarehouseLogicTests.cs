@@ -53,7 +53,7 @@ namespace WarehouseLogicTest
 
             Assert.IsNotNull(Product);
             Assert.AreEqual(1, Product.ID);
-            Assert.AreEqual("Clean Code", Product.Name);
+            Assert.AreEqual("Cleaning Kit", Product.Name);
             Assert.AreEqual("Cecil Martin", Product.Producer);
             Assert.AreEqual("Nice thing", Product.Description);
 

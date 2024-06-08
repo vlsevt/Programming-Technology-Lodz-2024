@@ -14,7 +14,9 @@ namespace WarehouseDataTest
     {
         private static string connectionString;
 
-        private readonly IDataRepository _dataRepository = IDataRepository.CreateDatabase(IDataContext.CreateContext(connectionString));
+        private readonly IDataRepository _dataRepository = IDataRepository.CreateDatabase(IDataContext.CreateContext(ConnectionString));
+
+        public static string ConnectionString { get => connectionString; set => connectionString = value; }
 
         [ClassInitialize]
         public static void ClassInitializeMethod(TestContext context)
@@ -24,7 +26,7 @@ namespace WarehouseDataTest
             string _DBPath = Path.Combine(_projectRootDir, _DBRelativePath);
             FileInfo _databaseFile = new FileInfo(_DBPath);
             Assert.IsTrue(_databaseFile.Exists, $"Database file does not exist at: {_databaseFile}");
-            connectionString = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={_DBPath};Integrated Security = True; Connect Timeout = 30;";
+            ConnectionString = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={_DBPath};Integrated Security = True; Connect Timeout = 30;";
         }
 
         [TestMethod]
@@ -154,7 +156,7 @@ namespace WarehouseDataTest
             int ProductID = 4;
             int StateID = 4;
 
-            _dataRepository.AddProduct(ProductID, "Programming in C", "Stephen G. Kochan", "Nice thing");
+            _dataRepository.AddProduct(ProductID, "Programming in C#", "Stephen G. Kochan", "Nice thing");
             _dataRepository.AddState(StateID, ProductID, 20);
             _dataRepository.AddUser(UserID, "John", "Wick");
 
