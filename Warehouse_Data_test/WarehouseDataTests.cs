@@ -8,7 +8,7 @@ using WarehouseDataLayer.APIs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 
-namespace LibraryDataTest
+namespace WarehouseDataTest
 {
     [TestClass]
     [DeploymentItem("WarehouseDB.mdf")]
@@ -21,7 +21,7 @@ namespace LibraryDataTest
         [ClassInitialize]
         public static void ClassInitializeMethod(TestContext context)
         {
-            string _DBRelativePath = @"LibraryDBTest.mdf";
+            string _DBRelativePath = @"WarehouseDB.mdf";
             string _projectRootDir = Environment.CurrentDirectory;
             string _DBPath = Path.Combine(_projectRootDir, _DBRelativePath);
             FileInfo _databaseFile = new FileInfo(_DBPath);
@@ -39,7 +39,7 @@ namespace LibraryDataTest
             IUser user = _dataRepository.GetUser(UserID);
 
             Assert.IsNotNull(user);
-            Assert.AreEqual(UserID, user.ID );
+            Assert.AreEqual(UserID, user.ID);
             Assert.AreEqual("John", user.Name);
             Assert.AreEqual("Wick", user.Surname);
 
@@ -69,29 +69,32 @@ namespace LibraryDataTest
         {
             int ProductID = 2;
 
-            _dataRepository.AddProduct(ProductID, "Cecil Martin", "Clean Code");
+            _dataRepository.AddProduct(ProductID, "Cleaning kit", "Cecil Martin", "Nice thing");
 
             IProduct Product = _dataRepository.GetProduct(ProductID);
 
             Assert.IsNotNull(Product);
             Assert.AreEqual(ProductID, Product.ID);
-            Assert.AreEqual("Cecil Martin", Product.Author);
-            Assert.AreEqual("Clean Code", Product.Name);
+            Assert.AreEqual("Cleaning kit", Product.Name);
+            Assert.AreEqual("Cecil Martin", Product.Producer);
+            Assert.AreEqual("Nice thing", Product.Description);
 
             Assert.IsNotNull(_dataRepository.GetProducts());
 
             Assert.ThrowsException<Exception>(() => _dataRepository.GetProduct(12));
 
-            _dataRepository.UpdateProduct(ProductID, "Aditya Y. Bhargava", "Grokking Algorithms");
+            _dataRepository.UpdateProduct(ProductID, "Wild rug", "Aditya", "Nice thing");
 
             IProduct ProductUpdated = _dataRepository.GetProduct(ProductID);
 
             Assert.IsNotNull(ProductUpdated);
             Assert.AreEqual(ProductID, ProductUpdated.ID);
-            Assert.AreEqual("Aditya Y. Bhargava", ProductUpdated.Author);
-            Assert.AreEqual("Grokking Algorithms", ProductUpdated.Name);
+            Assert.AreEqual("Wild rug", ProductUpdated.Name);
+            Assert.AreEqual("Aditya", ProductUpdated.Producer);
+            Assert.AreEqual("Nice thing", Product.Description);
 
-            Assert.ThrowsException<Exception>(() => _dataRepository.UpdateProduct(12, "Aditya Y. Bhargava", "Grokking Algorithms"));
+
+            Assert.ThrowsException<Exception>(() => _dataRepository.UpdateProduct(12, "Wild rug", "Aditya", "Nice thing"));
 
             _dataRepository.DeleteProduct(ProductID);
             Assert.ThrowsException<Exception>(() => _dataRepository.GetProduct(ProductID));
@@ -104,7 +107,7 @@ namespace LibraryDataTest
             int ProductID = 3;
             int StateID = 3;
 
-            _dataRepository.AddProduct(ProductID, "Stephen G. Kochan", "Programming in C");
+            _dataRepository.AddProduct(ProductID, "Programming in C", "Stephen G. Kochan", "Nice thing");
 
             IProduct Product = _dataRepository.GetProduct(ProductID);
 
@@ -115,7 +118,7 @@ namespace LibraryDataTest
             Assert.IsNotNull(State);
             Assert.AreEqual(StateID, State.ID);
             Assert.AreEqual(ProductID, State.ProductID);
-            Assert.AreEqual(20, State.ProductQuantity);
+            Assert.AreEqual(20, State.Quantity);
 
             Assert.IsNotNull(_dataRepository.GetStates());
 
@@ -132,7 +135,7 @@ namespace LibraryDataTest
             Assert.IsNotNull(StateUpdated);
             Assert.AreEqual(StateID, StateUpdated.ID);
             Assert.AreEqual(ProductID, StateUpdated.ProductID);
-            Assert.AreEqual(5, StateUpdated.ProductQuantity);
+            Assert.AreEqual(5, StateUpdated.Quantity);
 
             Assert.ThrowsException<Exception>(() => _dataRepository.UpdateState(StateID + 2, ProductID, 20));
             Assert.ThrowsException<Exception>(() => _dataRepository.UpdateState(StateID, 13, 20));
@@ -153,7 +156,7 @@ namespace LibraryDataTest
             int ProductID = 4;
             int StateID = 4;
 
-            _dataRepository.AddProduct(ProductID, "Stephen G. Kochan", "Programming in C");
+            _dataRepository.AddProduct(ProductID, "Programming in C", "Stephen G. Kochan", "Nice thing");
             _dataRepository.AddState(StateID, ProductID, 20);
             _dataRepository.AddUser(UserID, "John", "Wick");
 

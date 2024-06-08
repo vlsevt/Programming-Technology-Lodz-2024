@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using WarehouseLogicLayer;
+using WarehouseLogicLayer.Fakes;
 
 namespace WarehouseLogicTests
 {
