@@ -76,32 +76,33 @@ namespace WarehouseLogicTest
         [TestMethod]
         public void StateLogicTests()
         {
+            int StateID = 1;
             IProductCRUD ProductCrud = IProductCRUD.CreateProductCRUD(this._dataRepository);
             ProductCrud.AddProduct(1, "Cleaning kit", "Cecil Martin", "Nice thing");
             IProductDTO Product = ProductCrud.GetProduct(1);
 
             IStateCRUD StateCrud = IStateCRUD.CreateStateCRUD(this._dataRepository);
 
-            StateCrud.AddState(1, Product.ID, 12);
+            StateCrud.AddState(StateID, Product.ID, 12);
 
             IStateDTO State = StateCrud.GetState(1);
 
             Assert.IsNotNull(State);
-            Assert.AreEqual(1, State.ID);
+            Assert.AreEqual(StateID, State.ID);
             Assert.AreEqual(Product.ID, State.ProductID);
             Assert.AreEqual(12, State.Quantity);
 
-            StateCrud.UpdateState(1, Product.ID, 20);
+            StateCrud.UpdateState(StateID, Product.ID, 20);
 
-            IStateDTO updatedState = StateCrud.GetState(1);
-
+            IStateDTO updatedState = StateCrud.GetState(StateID);
+                
             Assert.IsNotNull(updatedState);
-            Assert.AreEqual(1, updatedState.ID);
+            Assert.AreEqual(StateID, updatedState.ID);
             Assert.AreEqual(Product.ID, updatedState.ProductID);
             Assert.AreEqual(20, updatedState.Quantity);
 
-            StateCrud.DeleteState(1);
-            ProductCrud.DeleteProduct(1);
+            StateCrud.DeleteState(StateID);
+            ProductCrud.DeleteProduct(StateID);
         }
 
         [TestMethod]

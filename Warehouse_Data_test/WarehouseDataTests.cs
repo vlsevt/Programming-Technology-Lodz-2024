@@ -75,10 +75,10 @@ namespace WarehouseDataTest
 
             IProduct Product = _dataRepository.GetProduct(ProductID);
 
-            Assert.IsNotNull(ProductID);
+            Assert.IsNotNull(Product); 
             Assert.AreEqual(ProductID, Product.ID);
-            Assert.AreEqual("Cleaning kit", Product.Name);
-            Assert.AreEqual("Cecil Martin", Product.Producer);
+            Assert.AreEqual("Cecil Martin", Product.Name); 
+            Assert.AreEqual("Cleaning kit", Product.Producer);
             Assert.AreEqual("Nice thing", Product.Description);
 
             Assert.IsNotNull(_dataRepository.GetProducts());
@@ -91,10 +91,9 @@ namespace WarehouseDataTest
 
             Assert.IsNotNull(ProductUpdated);
             Assert.AreEqual(ProductID, ProductUpdated.ID);
-            Assert.AreEqual("Wild rug", ProductUpdated.Name);
-            Assert.AreEqual("Aditya", ProductUpdated.Producer);
-            Assert.AreEqual("Nice thing", Product.Description);
-
+            Assert.AreEqual("Aditya", ProductUpdated.Name);
+            Assert.AreEqual("Wild rug", ProductUpdated.Producer);
+            Assert.AreEqual("Nice thing", ProductUpdated.Description);
 
             Assert.ThrowsException<Exception>(() => _dataRepository.UpdateProduct(12, "Wild rug", "Aditya", "Nice thing"));
 
@@ -102,6 +101,7 @@ namespace WarehouseDataTest
             Assert.ThrowsException<Exception>(() => _dataRepository.GetProduct(ProductID));
             Assert.ThrowsException<Exception>(() => _dataRepository.DeleteProduct(ProductID));
         }
+
 
         [TestMethod]
         public void StateTests()
