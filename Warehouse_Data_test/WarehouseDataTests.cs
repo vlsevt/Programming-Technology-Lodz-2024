@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WarehouseDataLayer.APIs;
+using WarehouseDataLayer;
+using WarehouseDataLayer.Database;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace WarehouseDataTest
@@ -73,7 +75,7 @@ namespace WarehouseDataTest
 
             IProduct Product = _dataRepository.GetProduct(ProductID);
 
-            Assert.IsNotNull(Product);
+            Assert.IsNotNull(ProductID);
             Assert.AreEqual(ProductID, Product.ID);
             Assert.AreEqual("Cleaning kit", Product.Name);
             Assert.AreEqual("Cecil Martin", Product.Producer);
